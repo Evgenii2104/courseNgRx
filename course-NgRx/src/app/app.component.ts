@@ -1,10 +1,8 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core'
 
 @Component({
-  selector: 'wfm-root',
+  selector: ' app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
-  title = 'course-NgRx';
-}
+export class AppComponent {}
