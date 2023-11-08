@@ -1,5 +1,10 @@
 import {Component, OnInit} from '@angular/core'
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {select, Store} from "@ngrx/store";
+import {registerAction} from "../../store/actions";
+import {Observable} from "rxjs";
+import {isSubmittingSelector} from "../../store/selectors";
+import {AppStateInterface} from "../../../shared/types/appState.interface";
 
 @Component({
   selector: 'mc-register',
@@ -9,14 +14,21 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 export class RegisterComponent implements OnInit{
   // @ts-ignore
   form: FormGroup
+  // @ts-ignore
+  isSubmitting$: Observable<boolean>
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private store: Store<AppStateInterface>) {
   }
 
   ngOnInit() {
-    this.initializeForm()
+    this.initializeForm();
+    this.initializeValues()
   }
 
+  initializeValues() {
+    this.isSubmitting$ = this.store.pipe(select(isSubmittingSelector))
+    console.log('isSubmitting$', this.isSubmitting$)
+  }
   initializeForm() {
     this.form = this.fb.group({
       username: ['', Validators.required],
@@ -26,5 +38,6 @@ export class RegisterComponent implements OnInit{
   }
   onSubmit() {
     console.log(this.form.value)
+    this.store.dispatch(registerAction(this.form.value))
   }
 }
