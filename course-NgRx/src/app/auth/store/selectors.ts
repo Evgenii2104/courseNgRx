@@ -16,3 +16,6 @@ export const validationErorrsSelector = createSelector(
   authFeatureSelector,
   (authState: AuthStateInterface) => authState.validationErrors
 )
+
+export class validationErrorsSelector {
+}
