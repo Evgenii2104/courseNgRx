@@ -5,7 +5,7 @@ import {Observable} from 'rxjs'
 
 import {
   isSubmittingSelector,
-  validationErorrsSelector
+  validationErrorsSelector
 } from '../../store/selectors'
 import {BackendErrorsInterface} from 'src/app/shared/types/backendErrors.interface'
 import {LoginRequestInterface} from 'src/app/auth/types/loginRequest.interface'
@@ -31,7 +31,7 @@ export class LoginComponent implements OnInit {
 
   initializeValues(): void {
     this.isSubmitting$ = this.store.pipe(select(isSubmittingSelector))
-    this.backendErrors$ = this.store.pipe(select(validationErorrsSelector))
+    this.backendErrors$ = this.store.pipe(select(validationErrorsSelector))
   }
 
   initializeForm(): void {

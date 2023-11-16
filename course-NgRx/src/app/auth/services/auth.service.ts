@@ -9,6 +9,7 @@ import {environment} from 'src/environments/environment'
 import {AuthResponseInterface} from 'src/app/auth/types/authResponse.interface'
 import {LoginRequestInterface} from "../types/loginRequest.interface";
 
+
 @Injectable()
 export class AuthService {
   constructor(private http: HttpClient) {}
@@ -29,5 +30,12 @@ export class AuthService {
     return this.http
       .post<AuthResponseInterface>(url, data)
       .pipe(map(this.getUser))
+  }
+
+  getCurrentUser(): Observable<CurrentUserInterface> {
+    const url = environment.apiUrl + './user'
+
+    // @ts-ignore
+    return this.http.get(url).pipe(map(this.getUser))
   }
 }

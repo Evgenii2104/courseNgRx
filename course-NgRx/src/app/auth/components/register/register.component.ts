@@ -3,7 +3,7 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {select, Store} from "@ngrx/store";
 import {registerAction} from "../../store/actions/register.action";
 import {Observable} from "rxjs";
-import {isSubmittingSelector, validationErorrsSelector} from "../../store/selectors";
+import {isSubmittingSelector, validationErrorsSelector} from "../../store/selectors";
 import {AppStateInterface} from "../../../shared/types/appState.interface";
 import {AuthService} from "../../services/auth.service";
 import {RegisterRequestInterface} from "../../types/registerRequest.interface";
@@ -29,7 +29,7 @@ export class RegisterComponent implements OnInit{
 
   initializeValues() {
     this.isSubmitting$ = this.store.pipe(select(isSubmittingSelector))
-    this.backendErrors$ = this.store.pipe(select(validationErorrsSelector))
+    this.backendErrors$ = this.store.pipe(select(validationErrorsSelector))
   }
   initializeForm() {
     this.form = this.fb.group({
